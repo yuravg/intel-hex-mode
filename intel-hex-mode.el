@@ -45,7 +45,8 @@
 
 (defgroup intel-hex nil
   "Major mode for editing Intel Hex files"
-  :group 'tools)
+  :version "0.1.3"
+  :group 'languages)
 
 (defun intel-hex-customize ()
   "Run \\[customize-group] for the `intel-hex' group."
@@ -99,7 +100,7 @@ package.  Note that the latest X/Emacs releases contain this package.")
     ["Customize..."               intel-hex-customize                t]))
 
 ;;;###autoload
-(define-derived-mode intel-hex-mode prog-mode ()
+(define-derived-mode intel-hex-mode prog-mode "Intel-hex"
   "Major mode for the Intel Hex files.
 \\<intel-hex-mode-map>
 \\[intel-hex-update-line-checksum]\t- Updates the line checksum.
@@ -115,8 +116,6 @@ This mode can be customized by running \\[intel-hex-customize].
 
 Turning on Intel Hex mode calls the value of the variable
 `intel-hex-mode-hook' with no args, if that value is non-nil."
-  (interactive)
-  (kill-all-local-variables)
   (set (make-local-variable 'font-lock-defaults)
        '(intel-hex-font-lock-keywords))
   (if intel-hex-menu
